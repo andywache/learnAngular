@@ -1,0 +1,269 @@
+#######Component 新增方法 #######
+{
+1.新增xxx.component.html && xxx.component.ts
+2.定義xxx.component.ts 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+import { Component } from "@angular/core";
+
+@Component({
+	selector:"xxx", (---定義此Component標籤名稱[例如 > "app-andy"]----)
+	templateUrl:"xxx.component.html" (---Component url位置---)
+})
+export class xxxxComponent{  (---定義此Component Class 名稱 [app.module.ts import用]---)
+
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+3.設定 app.module.ts
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+import { AndyComponent } from './andy/andy.component'; (---引用Component Class 名稱---)
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    ServerComponent,
+    AndyComponent	(---引用Component Class 名稱---)
+  ],
+  imports: [
+    BrowserModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+4.於app.component.html[Angular首頁]中填入Component標籤 即完成
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+<p>i am in AppComponent!</p>
+<hr>
+<app-server></app-server>	(---Component標籤---)
+<app-andy></app-andy>	(---Component標籤---)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+##############
+}
+
+#######Component 新增方法<CLI> #######
+{
+1.開啟console
+2.ng generate component ComponentName 亦可輸入(ng g c ComponentName)
+##############
+}
+
+#######model 新增方法 #######
+{
+1.新增xxx.model.ts
+
+}
+
+
+#######Component Selector 使用方法#######
+{
+1.xxx.component.ts
+@Component({
+  //selector: 'app-servers',  //Component use by element
+  //selector: '[app-servers]', //Component use by attribute
+  selector: '.app-servers', //Component use by class
+  // templateUrl: './servers.component.html',
+  template: `
+  <app-server></app-server>
+  <app-server></app-server>
+  <app-server></app-server>`,
+  styleUrls: ['./servers.component.css']
+})
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2.xxx.component.html
+
+                <app-servers></app-servers> <!-- //Component use by element-->
+                <div app-servers></div> <!-- //Component use by attribute -->
+				<div class="app_servers"></div> <!-- //Component use by class-->
+##############
+}
+
+
+{#######Angular event #######
+{
+1.input
+<input type="text" class="form-control" (input)="onUpdateServerName($event)">
+
+2.click
+<button class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">Add Server</button>
+
+3.[(ngModel)] two-way binding ----app.module.ts 需註冊 "import { FormsModule } from '@angular/forms';" && 新增至 imports(FormsModule)
+<input type="text" class="form-control" [(ngModel)] = "serverName">
+##############
+}
+
+
+#######Angular NGF(ngIf) #######(if ; else)
+{
++++xxx.component.ts+++
+serverCreated = false;
+  onCreateServer(){
+    this.serverCreated = true;
+    this.serverCreationStatus = "Server was created! Name is" + this.serverName;
+  }
+
++++HTML+++
+1.ngIf
+<p *ngIf="serverCreated">Server was created , server name is {{ serverName}}</p>
+<button 
+class="btn btn-primary"
+[disabled]="!allowNewServer"
+(click)="onCreateServer()">Add Server</button>
+  
+2.ngIf ; else
+<p *ngIf="serverCreated ; else noServer">Server was created , server name is {{ serverName}}</p>
+<ng-template #noServer>
+<p>No server was created!</p>
+</ng-template>
+############################
+}
+
+
+
+#######Angular NGStyle #######
+{
++++xxx.component.ts+++
+    constructor(){
+        this.serverStatus = Math.random() > 0.5 ? 'online' : 'offline';
+    }
+    
+    getServerStatus(){
+        return this.serverStatus;
+    }
+
+    getColor(){
+        return this.serverStatus === "online" ?"blue":"red";
+    }
+
++++HTML+++
+1.ngStyle
+<p>ServerStatus: 
+    <span [ngStyle]="{color:getColor()}">{{getServerStatus()}}</span>
+</p>
+##############
+}
+
+#######Angular ngClass #######
+{
++++xxx.component.ts+++
+@Component({
+    selector:"app-server",
+    templateUrl:"./server.component.html",
+    styles:[`
+    .online {
+    color:white;
+    }
+    `]
+})
+
+    constructor(){
+        this.serverStatus = Math.random() > 0.5 ? 'online' : 'offline';
+    }
+    
+    getServerStatus(){
+        return this.serverStatus;
+    }
+
+    getColor(){
+        return this.serverStatus === "online" ?"blue":"red";
+    }
+
++++HTML+++
+1.ngClass
+<p>ServerStatus: 
+    <span 
+    [ngStyle]="{backgroundColor:getColor()}"
+    [ngClass]="{online:serverStatus === 'online'}">
+    {{getServerStatus()}}</span>
+</p>
+##############
+}
+
+#######Angular ngFor #######
+{
++++xxx.component.ts+++
+servers = ['testServer','testServer 2'];
+
+  onCreateServer(){
+    this.serverCreated = true;
+    this.servers.push(this.serverName)
+    this.serverCreationStatus = "Server was created! Name is" + this.serverName;
+  }
+
++++HTML+++
+1.ngFor
+<button 
+class="btn btn-primary"
+[disabled]="!allowNewServer"
+(click)="onCreateServer()">Add Server</button>
+
+<app-server *ngFor="let server of servers"></app-server>
+}
+
+
+
+#######Binding to Custom Properties (Component 資料傳遞新增方法) #######
+{
+1-1.父建立資料[父Component] (例:serverElements)
+1-2.子Html引用 (例:[element]='serverElement')
+2-1.子Component引用並綁定資料 (Input)
+2-2.子Html引用
+
+
+1-1.+++app.component.ts+++(父Component)
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  serverElements = [{type:'server',name:'Testserver',content:'Just a test!'}];
+}
+
+1-2+++app.component.html+++(父Html)
+<div class="container">
+  <app-cockpit></app-cockpit>
+  <div class="row">
+    <div class="col-xs-12">
+      <app-server-element
+      *ngFor="let serverElement of serverElements"
+      [element]='serverElement'
+      ></app-server-element>
+    </div>
+  </div>
+</div>
+
+2-1.+++xxx.component.ts+++(子Component)
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-server-element',
+  templateUrl: './server-element.component.html',
+  styleUrls: ['./server-element.component.css']
+})
+export class ServerElementComponent implements OnInit {
+  @Input() element: {type:string , name:string , content:string};
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+}
+2-2.+++xxx.component.html+++(子html)
+
+<div
+class="panel panel-default">
+<div class="panel-heading">{{ element.name }}</div>
+<div class="panel-body">
+  <p>
+    <strong *ngIf="element.type === 'server'" style="color: red">{{ element.content }}</strong>
+    <em *ngIf="element.type === 'blueprint'">{{ element.content }}</em>
+  </p>
+</div>
+</div>
+
+
+
+}

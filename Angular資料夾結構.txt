@@ -1,0 +1,22 @@
+--資料夾結構--
+
+++++++++++++++++++++++
+#e2e ---- [end-to-end testing]
+
+++++++++++++++++++++++
+#node_modules ---- [installed package.json file ](類似套件庫---使用時需至angular.json引用)
+
+++++++++++++++++++++++
+#src ---- [code is]
+*app 
+xxx.component.html
+xxx.components.ts
+xxx.module.ts
+xxx.component.spec.ts ---- [test]
+
+
+++++++++++++++++++++++
+#angular.json ---- [library layout]
+
+++++++++++++++++++++++
+#package.json ---- [now use version](no need to change)

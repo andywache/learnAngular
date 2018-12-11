@@ -1,0 +1,35 @@
+//webStorm is good for Angular develope
+
+#######安裝node.js並套用至angular#######
+1.下載node.js 並安裝  && 開啟comsole 依附至angular
+2.npm install -g @angular/cli
+
+
+#######安裝bootstrap 並套用至Angular#######
+1.npm install --save bootstrap@3 (console安裝)
+2.尋找css[boostrap.min.css]檔案位置 (node_modules下---src/node_modules/boostrap/dist/css/bostrap.min.css)
+3.至angular.json 新增至 styles底下
+"styles":[
+"src/style.css",
+"node_modules/bootstrap/dist/css/bootstrap.min.css"
+],
+
+#######建立Angular 新專案#######
+ng new ProjectName
+
+#######啟動服務(from console) #######
+ng serve 
+
+#######Angular tools #######
+ngModel
+
+#######Angular專案啟動順序 #######
+main.ts > xxx.module > (xxx.component.xxx)
+
+#######Angular建立Component #######
+ng generate component ComponentName 亦可輸入(ng g c ComponentName)
+
+#除錯工具#
+Augury (Chrome 工具)
+
+
