@@ -2,6 +2,7 @@
 {
 1.新增xxx.component.html && xxx.component.ts
 2.定義xxx.component.ts 
+"備註" ng g c xxx --spec false(不產生spec文件)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 import { Component } from "@angular/core";
 
@@ -117,7 +118,6 @@ class="btn btn-primary"
 </ng-template>
 ############################
 }
-
 
 
 #######Angular NGStyle #######
@@ -305,7 +305,7 @@ export class ServerElementComponent implements OnInit {
 }	
 
 
-#######Component 傳遞事件方法 (Output [子傳父](上傳下))#######
+#######Component 事件傳遞方法 (Output [子傳父](事件綁訂回傳--外到內))#######
 {
 1-1.建立事件 in HTML (例:serverCreated , blueprintCreated)
 ____app.component.html+++(父Html)____
@@ -352,7 +352,7 @@ export class AppComponent {
   }
   }
   
-2-1.資料傳遞事件"子 > 父" (Output) (import 引用 Output"輸出")(@Output 引用父事件[HTML名稱] && 定義屬性)
+2-1.資料傳遞事件"子 > 父" (Output) (import 引用 Output"輸出")(@Output 引用父ng事件[HTML名稱] && 定義屬性<複製父Component>)
 ____xxx.component.ts (子Component)____
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
@@ -409,7 +409,7 @@ ____xxx.component.html (子HTML)____
 }
 
 
-#######Component 傳遞事件方法[Output自訂名稱] (Output [子傳父](上傳下))#######
+#######Component 事件傳遞方法[Output自訂名稱] (Output [子傳父](事件綁訂回傳--外到內))#######
 {
 1.定義傳遞事件"bpCreated"
 ____app.component.html+++(父Html)____
@@ -640,7 +640,7 @@ class="panel panel-default">
 #######Component Liecycle  #######
 {
 ngOnChanges : Called after a bound input property changes
-ngOnlnit : Called once the components is initialized
+ngOnInit : Called once the components is initialized
 ngDoCheck : Called during every change detection run
 ngAfterContentlnit : Called after content(ng-content) has been projected into view 
 ngAfterContentCehcked : Called every time the projected content has been checked
