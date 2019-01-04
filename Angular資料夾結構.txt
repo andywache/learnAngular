@@ -14,6 +14,8 @@ xxx.components.ts
 xxx.module.ts
 xxx.component.spec.ts ---- [test]
 
+*app/assets ----- 放靜態檔案的資料夾(如圖檔等)
+
 
 ++++++++++++++++++++++
 #angular.json ---- [library layout]

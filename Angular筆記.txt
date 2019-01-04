@@ -649,7 +649,13 @@ ngOnDestroy : Called once the components is about to be destroyed
 }
 
 
-#######  #######
+#######«Ø¥ßAttribute Directive (ng command)#######
+{
+1.¶}±Òconsole
+2.ng g d directiveName
+}
+
+
 #######  #######
 #######  #######
 #######  #######
