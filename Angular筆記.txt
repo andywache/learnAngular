@@ -1,3 +1,23 @@
+####### 快捷鍵 #######
+alt + O 開啟相依Componet
+ctrl + 左鍵 function追蹤
+
+####### 資料傳遞方法 #######
+{
+"內嵌繫結"
+{{ property }}
+
+"屬性繫結"
+[property] = 'statement'
+
+"事件繫結"
+(event)='someMethod($event)'
+
+"雙向繫結"
+[(ngModel)]='property'
+
+}
+
 #######Component 新增方法 #######
 {
 1.新增xxx.component.html && xxx.component.ts
